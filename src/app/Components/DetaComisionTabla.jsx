@@ -35,10 +35,11 @@ function DetaComisionTabla() {
             {estadistica.map((item, index) => (
               <tr key={index} className="bg-gray-300 bg-opacity-20 px-2 py-2 text-left">
                 <td className="px-2 py-2 text-black">-</td>
-                <td className="px-2 py-2 text-black">-</td>
+                <td className="px-2 py-2 text-black">{item.comision}</td>
                 <td className="px-2 py-2 text-black">{item.resultado_factura}</td>
                 <td className="px-2 py-2 text-black">{item.meta_factura}</td>
                 <td className="px-2 py-2 text-black">-</td>
+                {/* <td className="px-2 py-2 text-black">{item.resultados[0].na_cumplimiento}</td> */}
                 <td className="px-2 py-2 text-black">-</td>
               </tr>
             ))}

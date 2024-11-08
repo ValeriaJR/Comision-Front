@@ -19,8 +19,8 @@ function ModalLiderMes() {
 
   return (
     <div className="relative">
-      <button onClick={toggleModal} className=" flex text-black hover:text-gray-800">
-       Lider <BsCardChecklist size={20}/>
+      <button onClick={toggleModal} className="mx-2 flex text-black hover:text-gray-800">
+       <BsCardChecklist size={20}/>
       </button>
 
       {isOpen && (
