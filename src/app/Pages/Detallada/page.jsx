@@ -31,14 +31,16 @@ export default function Detallada() {
     }, []);
 
     useEffect(() => {
-        setDataFilteredCampaña(
-            dataCampaña.filter(row =>
-                (row.lider && row.lider.toString().toLowerCase().includes(search.toLowerCase())) ||
-                (row.resultados.campaña && row.resultados.campaña.toString().toLowerCase().includes(search.toLowerCase())) ||
-                (search == "Lider" && row),
-            )
-        );
-    }, [search, dataCampaña]);
+    setDataFilteredCampaña(
+        dataCampaña.filter(row =>
+            (row.lider && row.lider.toString().toLowerCase().includes(search.toLowerCase())) ||
+            (row.resultados.some(result => 
+                result.campaña && result.campaña.toString().toLowerCase().includes(search.toLowerCase())
+            )) ||
+            (search === "Lider" && row)
+        )
+    );
+}, [search, dataCampaña]);
     
 
     return (
