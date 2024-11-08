@@ -2,11 +2,12 @@ import React from 'react';
 import ModalCalidad from './ModalCalidad';
 import ModalDetallada from './ModalDetallada';
 
-function DetaFacturacionTabla() {
+function DetaFacturacionTabla({dataCampaña}) {
+  
     return (
-        <div className="flex justify-center">
-        <div className="overflow-x-auto w-4/5 my-6">
-            <table className="min-w-full border-collapse shadow-lg">
+        <div className="flex justify-center h-full overflow-hidden">
+        <div className="overflow-x-auto w-4/5 my-4">
+          <table className="min-w-full border-collapse shadow-lg">
             <thead>
                 <tr className="bg-gray-500 bg-opacity-20 px-2 py-2 text-left ">
                 <th className="px-2">Campaña</th>
@@ -22,14 +23,14 @@ function DetaFacturacionTabla() {
                 </tr>
             </thead>
             <tbody>
-                <tr className="bg-gray-300 bg-opacity-20 px-2 py-2 text-left ">
-                <td className="px-2 py-2 text-gray-700">-</td>
-                <td className="py-2 text-gray-700">-</td>
-                <td className="py-2 text-gray-700">-</td>
-                <td className="py-2 text-gray-700">-</td>
-                <td className="py-2 text-gray-700"><ModalDetallada /></td>
-                <td className="py-2 text-gray-700">-</td>
-                </tr>
+            {dataCampaña?.map((item, index) => (<tr key={index} className="bg-gray-300 bg-opacity-20 px-2 py-2 text-left ">
+                <td  className="px-2 py-2 text-black">{item.nombre}</td>
+                <td className="py-2 text-black">-</td>
+                <td className="py-2 text-black">-</td>
+                <td className="py-2 text-black">-</td>
+                <td className="py-2 text-black"><ModalDetallada /></td>
+                <td className="py-2 text-black">-</td>
+                </tr>))}
             </tbody>
             </table>
         </div>

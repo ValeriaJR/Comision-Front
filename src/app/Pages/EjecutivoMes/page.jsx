@@ -9,7 +9,8 @@ import ModalIndice from "@/app/Components/ModalIndice";
 import ModalParticipacion from "@/app/Components/ModalParticipacion";
 import Nav from "@/app/Components/Nav";
 import Rol from "@/app/Components/Rol";
-import { useState } from 'react';
+import { fetchData } from "@/services/axiosConfig";
+import { useEffect, useState } from 'react';
 
 export default function EjecutivoMes(){
     const [activeTable, setActiveTable] = useState('Comisión');

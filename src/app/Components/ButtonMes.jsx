@@ -1,4 +1,19 @@
-export default function ButtonMes(){
+import { useState, useEffect } from "react";
+export default function ButtonMes({onChange}){
+  const [mes, setMes] = useState([]);
+
+  useEffect(() => {
+    const obtenerDatos = async () => {  // Renombramos la función interna para evitar conflicto de nombres
+      try {
+        const response = await fetch("http://127.0.0.1:8000/comision/estadisticasLider/");  // Llamada fetch a la URL
+        const data = await response.json(); // Parseamos la respuesta a JSON
+        setMes(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    obtenerDatos(); // Llamamos a la función async dentro del useEffect
+  }, []);
     return<>
 <div
   className="relative group m-auto rounded-xl w-64 bg-gray-300 bg-opacity-30 border border-gray-400 overflow-hidden before:absolute before:w-12 before:h-12 before:content[''] "
@@ -22,21 +37,11 @@ export default function ButtonMes(){
       className="svg-stroke-primary"
     ></path>
   </svg>
-  <select
+  <select onClick={onChange}
      defaultValue="Mes" className="appearance-none relative bg-transparent ring-0 outline-none text-gray-500 text-sm font-bold rounded-lg block w-full p-2.5" >
     <option disabled value="Mes">Mes</option>
-    <option value="Enero">Enero</option>
-    <option value="Febrero">Febrero</option>
-    <option value="Marzo">Marzo</option>
-    <option value="Abril">Abril</option>
-    <option value="Mayo">Mayo</option>
-    <option value="Junio">Junio</option>
-    <option value="Julio">Julio</option>
-    <option value="Agosto">Agosto</option>
-    <option value="Septiembre">Septiembre</option>
-    <option value="Octubre">Octubre</option>
-    <option value="Noviembre">Noviembre</option>
-    <option value="Diciembre">Diciembre</option>
+    {[...new Set(mes.map(item => item.mes))].map((mesUnico, index) => (
+  <option key={index}>{mesUnico}</option>))}
   </select>
 </div>
 </>
