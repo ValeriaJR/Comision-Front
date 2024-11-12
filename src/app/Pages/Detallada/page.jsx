@@ -12,7 +12,7 @@ export default function Detallada() {
     const [activeTable, setActiveTable] = useState('Comisión');
     const [dataCampaña, setDataCampaña] = useState([]);
     const [dataFilteredCampaña, setDataFilteredCampaña] = useState([]);
-    const [search, setSearch] = useState("");
+    const [search, setSearch] = useState({lider: "", mes: ""});
     
 
     useEffect(() => {
@@ -31,16 +31,20 @@ export default function Detallada() {
     }, []);
 
     useEffect(() => {
-    setDataFilteredCampaña(
-        dataCampaña.filter(row =>
-            (row.lider && row.lider.toString().toLowerCase().includes(search.toLowerCase())) ||
-            (row.resultados.some(result => 
-                result.campaña && result.campaña.toString().toLowerCase().includes(search.toLowerCase())
-            )) ||
-            (search === "Lider" && row)
-        )
-    );
-}, [search, dataCampaña]);
+        setDataFilteredCampaña(
+            dataCampaña.filter(row =>
+                // Filtra por líder y mes al mismo tiempo
+                ((row.lider && row.lider.toString().toLowerCase().includes(search.lider.toLowerCase())) ||
+                (row.resultados.some(result => 
+                    result.campaña && result.campaña.toString().toLowerCase().includes(search.lider.toLowerCase())
+                )) || (search.lider === "Lider" && row)) &&
+                ((row.mes && row.mes.toString().toLowerCase().includes(search.mes.toLowerCase())) ||
+                (row.resultados.some(result => 
+                    result.campaña && result.campaña.toString().toLowerCase().includes(search.mes.toLowerCase())
+                )) || (search.mes === "Mes" && row))
+            )
+        );
+    }, [search, dataCampaña]);
     
 
     return (
@@ -49,8 +53,8 @@ export default function Detallada() {
             <div>
                 <Rol />
                 <div className="m-auto w-2/4 my-10 justify-evenly flex">
-                    <ButtonLider onChange={e => setSearch(e.target.value)} />
-                    <ButtonMes />
+                    <ButtonLider onChange={e => setSearch({...search, lider: e.target.value})} />
+                    <ButtonMes onChange={e => setSearch({...search, mes: e.target.value})}/>
                 </div>
                 <ButtonSwitch onToggle={setActiveTable} />
             </div>

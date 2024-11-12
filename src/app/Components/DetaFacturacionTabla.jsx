@@ -14,6 +14,7 @@ function DetaFacturacionTabla({ dataCampaña }) {
                 <th className="">Meta FTE</th>
                 <th className="">Facturación</th>
                 <th className="">Especificaciones</th>
+                <th className="">Mes</th>
                 <th className="flex mx-2 ">
                     <div className="text-center align-center m-1">
                     <ModalCalidad />
@@ -40,6 +41,9 @@ function DetaFacturacionTabla({ dataCampaña }) {
                     </td>
                     <td className="py-2 text-black">
                         <ModalDetallada />
+                    </td>
+                    <td className="py-2 text-black">
+                        {item.mes || "-"}
                     </td>
                     <td className="py-2 text-black"></td>
                     </tr>
